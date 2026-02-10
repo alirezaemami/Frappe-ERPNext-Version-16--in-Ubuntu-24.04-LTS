@@ -225,6 +225,10 @@ bench setup socketio
 bench setup supervisor
 bench setup redis
 sudo supervisorctl reload
+bench use {site-name}
+sudo nano /etc/supervisor/supervisord.conf (change chmod from 0700 ti 0760)
+bench restart
+sudo service supervisor restart
 ```
 Set as production
 

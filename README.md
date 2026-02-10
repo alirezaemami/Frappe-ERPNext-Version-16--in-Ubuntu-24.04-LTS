@@ -210,3 +210,19 @@ Downloads ERPNext app from GitHub
 bench install-app erpnext
 ```
 Installs ERPNext app on the site
+---------------------------------------------
+## Step 32
+```bash
+sudo chmod -R o+rx /home/{user-name}
+bench --site [site-name] enable-scheduler
+bench --site [site-name] set-maintenance-mode off
+sudo apt install nginx
+sudo bench setup production {user-name} (use-name: frappe)
+sudo supervisorctl restart all
+bench setup socketio
+bench setup supervisor
+bench setup redis
+sudo supervisorctl reload
+```
+Set as production
+

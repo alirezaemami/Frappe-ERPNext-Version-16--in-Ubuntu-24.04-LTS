@@ -213,6 +213,7 @@ Installs ERPNext app on the site
 ---------------------------------------------
 ## Step 32
 ```bash
+sudo apt update
 sudo chmod -R o+rx /home/{user-name}
 bench --site [site-name] enable-scheduler
 bench --site [site-name] set-maintenance-mode off

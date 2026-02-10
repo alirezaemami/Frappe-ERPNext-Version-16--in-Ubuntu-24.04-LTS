@@ -157,6 +157,8 @@ Reference link to download wkhtmltopdf package Download the .deb file for your s
 
 ## Step 23
 ```bash
+sudo apt install -y fontconfig
+sudo apt --fix-broken install
 sudo dpkg -i wkhtmltox_file.deb
 ```
 Installs wkhtmltopdf package manually

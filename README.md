@@ -13,6 +13,13 @@
 7. mariadb 11.8
 
 
+## Step 0
+sudo adduser frappe
+sudo usermod -aG sudo frappe
+su - frappe
+Create New User
+
+
 ## Step 1
 ```bash
 sudo apt-get update && sudo apt-get upgrade -y

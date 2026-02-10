@@ -218,6 +218,7 @@ sudo chmod -R o+rx /home/{user-name}
 bench --site [site-name] enable-scheduler
 bench --site [site-name] set-maintenance-mode off
 sudo apt install nginx
+sudo /usr/bin/python3 -m pip install --break-system-packages ansible
 sudo bench setup production {user-name} (use-name: frappe)
 sudo supervisorctl restart all
 bench setup socketio

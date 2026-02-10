@@ -14,9 +14,11 @@
 
 
 ## Step 0
+```bash
 sudo adduser frappe
 sudo usermod -aG sudo frappe
 su - frappe
+```
 Create New User
 
 
@@ -40,7 +42,7 @@ Refreshes the package list after adding a new repository
 
 ## Step 4
 ```bash
-sudo apt install python3.14 python3.14-venv
+sudo apt install python3.14 python3.14-venv python3-pip 
 ```
 Installs Python 3.14 and its virtual environment module
 

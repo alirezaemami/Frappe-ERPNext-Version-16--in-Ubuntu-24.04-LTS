@@ -462,3 +462,66 @@ bench restart
 ---
 
 > **Root cause:** The most common cause of this error is a missing symlink in `/etc/supervisor/conf.d/` — supervisor never loaded the frappe group in the first place.
+
+---
+
+---
+
+# Troubleshooting — Nginx `unknown log format "main"` Error
+
+## Error
+
+```
+[emerg] unknown log format "main" in /etc/nginx/conf.d/frappe-bench.conf:109
+nginx: configuration file /etc/nginx/nginx.conf test failed
+```
+
+**Cause:** The Frappe-generated nginx config references a log format called `"main"` (line 109 of `frappe-bench.conf`), but this format is not defined in your `nginx.conf`.
+
+---
+
+## Fix Option 1 (Recommended) — Define `main` log format in nginx.conf
+
+This is the permanent fix. If you regenerate the Frappe nginx config later, it will still work.
+
+```bash
+sudo nano /etc/nginx/nginx.conf
+```
+
+Inside the `http { }` block, add this (right after `include mime.types;` or similar):
+
+```nginx
+log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+                '$status $body_bytes_sent "$http_referer" '
+                '"$http_user_agent" "$http_x_forwarded_for"';
+```
+
+Then test and reload:
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+---
+
+## Fix Option 2 (Quick) — Replace `main` with `combined` in frappe-bench.conf
+
+`combined` is nginx's built-in log format and requires no definition.
+
+```bash
+sudo sed -i 's/ main;/ combined;/g' /etc/nginx/conf.d/frappe-bench.conf
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+> **Caveat:** If you run `bench setup nginx` again, it regenerates `frappe-bench.conf` and reintroduces `main`. Use Fix Option 1 to avoid this.
+
+---
+
+## Expected output after the fix
+
+```
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+```

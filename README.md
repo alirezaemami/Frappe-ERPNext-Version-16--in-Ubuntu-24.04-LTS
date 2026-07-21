@@ -70,7 +70,7 @@ Installs Python 3.14 and its virtual environment module.
 
 ```bash
 python3.14 --version
-pip3.14 --version
+pip3 --version
 ```
 
 Verifies Python and pip installation versions.
